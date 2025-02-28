@@ -13,124 +13,133 @@ struct HomeView: View {
                     .edgesIgnoringSafeArea(.all)
                     .scaledToFill()
 
-                // Testo "BENVENUTO NELLA WILSON BASETTA BOXING SCHOOL" su tre righe con contorno nero
+                // Testo "WBBS" e "WELCOME" con contorno nero
                 VStack {
-                    Text("BENVENUTO NELLA")
-                        .font(.custom("Impact", size: 30).italic())
-                        .foregroundColor(.white)
+                    Text("WBBS")
+                        .font(.custom("Impact", size: 70).italic())
+                        .foregroundColor(.white) // Colore del testo
                         .shadow(color: .black, radius: 5, x: 0, y: 5)
+                        .padding(10) // Padding per il testo
+                        .background(Color.green.opacity(0.7)) // Sfondo verde trasparente
                         .overlay(
                             RoundedRectangle(cornerRadius: 0)
-                                .stroke(.black, lineWidth: 2) // Aggiungi un contorno nero di 2 punti
+                                .stroke(.black, lineWidth: 2) // Contorno nero di 2 punti
                         )
-                    Text("WILSON BASETTA")
+
+                    Text("WELCOME")
                         .font(.custom("Impact", size: 30).italic())
-                        .foregroundColor(.white)
+                        .foregroundColor(.white) // Colore del testo
                         .shadow(color: .black, radius: 5, x: 0, y: 5)
+                        .padding(10) // Padding per il testo
+                        .background(Color.green.opacity(0.7)) // Sfondo verde trasparente
                         .overlay(
                             RoundedRectangle(cornerRadius: 0)
-                                .stroke(.black, lineWidth: 2) // Aggiungi un contorno nero di 2 punti
-                        )
-                    Text("BOXING SCHOOL")
-                        .font(.custom("Impact", size: 30).italic())
-                        .foregroundColor(.white)
-                        .shadow(color: .black, radius: 5, x: 0, y: 5)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 0)
-                                .stroke(.black, lineWidth: 2) // Aggiungi un contorno nero di 2 punti
+                                .stroke(.black, lineWidth: 2) // Contorno nero di 2 punti
                         )
                 }
-                .padding(.top, 50) // Riduci lo spazio sopra il testo per spostarlo più in alto
+                .padding(.top, -390) // Mantenuto
 
-                // Fila di icone in basso
+                // Fila di icone in basso con scorrimento orizzontale
                 VStack {
-                    Spacer() // Spinge le icone verso il basso
+                    Spacer()
 
-                    HStack {
-                        // Icona "contact"
-                        Button(action: {
-                            // Azione per "contact"
-                            openWhatsApp(phoneNumber: "3355405933")
-                            print("Contact tapped!")
-                        }) {
-                            Image("contact")
-                                .resizable()
-                                .frame(width: 60, height: 60) // Aumenta le dimensioni dell'icona
-                                .overlay(
-                                    Circle()
-                                        .stroke(Color.green, lineWidth: 2) // Aggiungi un cerchio verde
-                                        .frame(width: 70, height: 70) // Assicurati che il cerchio contenga l'icona
-                                )
-                        }
+                    // ScrollView orizzontale per le icone
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 20) { // Spazio tra le icone
+                            // Icona "start" con etichetta
+                            iconWithLabel(
+                                imageName: "start",
+                                label: "Let's Start!",
+                                action: {
+                                    // Azione per "start"
+                                },
+                                isNavigationLink: true
+                            )
 
-                        // Icona "the book"
-                        Button(action: {
-                            // Azione per "the book"
-                            openURL(urlString: "https://www.amazon.it/Boxe-Gleasons-Gym-Ediz-illustrata/dp/8827226850")
-                            print("The book tapped!")
-                        }) {
-                            Image("libro")
-                                .resizable()
-                                .frame(width: 60, height: 60) // Aumenta le dimensioni dell'icona
-                                .overlay(
-                                    Circle()
-                                        .stroke(Color.green, lineWidth: 2) // Aggiungi un cerchio verde
-                                        .frame(width: 70, height: 70) // Assicurati che il cerchio contenga l'icona
-                                )
-                        }
+                            // Icona "prenota" con etichetta
+                            iconWithLabel(
+                                imageName: "prenota",
+                                label: "Book Now",
+                                action: {
+                                    isCalendarViewPresented = true
+                                    print("Prenota tapped!")
+                                }
+                            )
 
-                        // Icona "prenota"
-                        Button(action: {
-                            // Azione per "prenota"
-                            isCalendarViewPresented = true
-                            print("Prenota tapped!")
-                        }) {
-                            Image("prenota")
-                                .resizable()
-                                .frame(width: 60, height: 60) // Aumenta le dimensioni dell'icona
-                                .overlay(
-                                    Circle()
-                                        .stroke(Color.green, lineWidth: 2) // Aggiungi un cerchio verde
-                                        .frame(width: 70, height: 70) // Assicurati che il cerchio contenga l'icona
-                                )
-                        }
+                            // Icona "contact" con etichetta
+                            iconWithLabel(
+                                imageName: "contact",
+                                label: "Contact",
+                                action: {
+                                    openWhatsApp(phoneNumber: "3355405933")
+                                    print("Contact tapped!")
+                                }
+                            )
 
-                        // Icona "shop"
-                        Button(action: {
-                            // Azione per "shop"
-                            openURL(urlString: "https://wilsonbasetta.wixsite.com/wilsonbasetta/about-1")
-                            print("Shop tapped!")
-                        }) {
-                            Image("shop")
-                                .resizable()
-                                .frame(width: 40, height: 40) // Riduci le dimensioni dell'icona "shop"
-                                .overlay(
-                                    Circle()
-                                        .stroke(Color.green, lineWidth: 2) // Aggiungi un cerchio verde
-                                        .frame(width: 60, height:60) // Assicurati che il cerchio contenga l'icona
-                                )
-                        }
+                            // Icona "the book" con etichetta
+                            iconWithLabel(
+                                imageName: "libro",
+                                label: "The Book",
+                                action: {
+                                    openURL(urlString: "https://www.amazon.it/Boxe-Gleasons-Gym-Ediz-illustrata/dp/8827226850")
+                                    print("The book tapped!")
+                                }
+                            )
 
-                        // Icona "start"
-                        NavigationLink(destination: StartView()) {
-                            Image("start")
-                                .resizable()
-                                .frame(width: 60, height: 60) // Aumenta le dimensioni dell'icona
-                                .overlay(
-                                    Circle()
-                                        .stroke(Color.green, lineWidth: 2) // Aggiungi un cerchio verde
-                                        .frame(width: 70, height: 70) // Assicurati che il cerchio contenga l'icona
-                                )
+                            // Icona "shop" con etichetta
+                            iconWithLabel(
+                                imageName: "shop",
+                                label: "Shop",
+                                action: {
+                                    openURL(urlString: "https://wilsonbasetta.wixsite.com/wilsonbasetta/about-1")
+                                    print("Shop tapped!")
+                                }
+                            )
                         }
+                        .padding(.horizontal, 20) // Padding laterale per evitare che le icone tocchino i bordi
                     }
-                    .padding(.bottom, 20) // Aggiunge un po' di spazio dal bordo inferiore
-                    .background(Color.clear) // Rende lo sfondo dell'HStack trasparente
+                    .padding(.bottom, 20) // Spazio dal bordo inferiore
                 }
             }
             .sheet(isPresented: $isCalendarViewPresented) {
                 CalendarView()
             }
         }
+        .navigationViewStyle(StackNavigationViewStyle())
+    }
+
+    // Funzione per creare una vista icona con etichetta e rettangolo di sfondo
+    func iconWithLabel(imageName: String, label: String, action: @escaping () -> Void, isNavigationLink: Bool = false) -> some View {
+        VStack {
+            if isNavigationLink {
+                NavigationLink(destination: StartView()) {
+                    iconView(imageName: imageName, width: 50, height: 60)
+                }
+            } else {
+                Button(action: action) {
+                    iconView(imageName: imageName, width: 50, height: 60)
+                }
+            }
+            Text(label)
+                .font(.system(size: 14, weight: .medium))
+                .foregroundColor(.white)
+                .shadow(color: .black, radius: 2, x: 0, y: 2)
+        }
+        .padding(10) // Padding interno
+        .background(
+            RoundedRectangle(cornerRadius: 10) // Rettangolo con angoli arrotondati
+                .fill(Color.blue.opacity(0.4)) // Colore di sfondo
+        )
+    }
+
+    // Funzione per creare una vista icona riutilizzabile
+    func iconView(imageName: String, width: CGFloat, height: CGFloat) -> some View {
+        Image(imageName)
+            .resizable()
+            .frame(width: width, height: height)
+            .padding(10)
+            .background(Color.blue.opacity(0.4))
+            .clipShape(Circle())
     }
 
     // Funzione per aprire WhatsApp
@@ -140,13 +149,10 @@ struct HomeView: View {
         if UIApplication.shared.canOpenURL(whatsappURL!) {
             UIApplication.shared.open(whatsappURL!, options: [:], completionHandler: nil)
         } else {
-            // WhatsApp non è installato
             print("WhatsApp non è installato!")
-            // Puoi mostrare un alert all'utente
             let alert = UIAlertController(title: "WhatsApp", message: "WhatsApp non è installato.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
 
-            // Trova la view controller corrente e presenta l'alert
             if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                let rootViewController = windowScene.windows.first?.rootViewController {
                 rootViewController.present(alert, animated: true, completion: nil)
@@ -159,13 +165,10 @@ struct HomeView: View {
         if let url = URL(string: urlString) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         } else {
-            // URL non valido
             print("URL non valido!")
-            // Puoi mostrare un alert all'utente
             let alert = UIAlertController(title: "Errore", message: "URL non valido.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
 
-            // Trova la view controller corrente e presenta l'alert
             if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                let rootViewController = windowScene.windows.first?.rootViewController {
                 rootViewController.present(alert, animated: true, completion: nil)
