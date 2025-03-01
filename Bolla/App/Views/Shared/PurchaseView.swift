@@ -1,9 +1,11 @@
 import SwiftUI
+import UIKit
 
 struct PurchaseView: View {
     @State private var numberOfLessons = 0
     let lessonCost = 50
     let bonusPackCost = 230
+    let bonusPackLessons = 5 // Numero di lezioni nel bonus pack
 
     var totalCost: Int {
         return numberOfLessons * lessonCost
@@ -84,7 +86,7 @@ struct PurchaseView: View {
                             // Pulsante "Acquista"
                             Button(action: {
                                 // Apri PayPal quando l'utente clicca su "Acquista"
-                                openPayPal(numberOfLessons: numberOfLessons, totalCost: totalCost)
+                                openPayPal(numberOfLessons: numberOfLessons, totalCost: totalCost, isBonusPack: false) //Indica che non è il bonus pack
                             }) {
                                 Text("Acquista")
                                     .font(.system(size: 18, weight: .semibold, design: .default))
@@ -104,20 +106,25 @@ struct PurchaseView: View {
                         .padding(.bottom, 20)
 
                         // Bonus Pack
-                        VStack(alignment: .center) {
-                            Text("Bonus Pack")
-                                .font(.system(size: 32, weight: .bold, design: .default))
-                                .foregroundColor(.yellow)
-                                .shadow(color: .black, radius: 5)
+                        Button(action: {
+                            // Apri PayPal con il bonus pack
+                            openPayPal(numberOfLessons: bonusPackLessons, totalCost: bonusPackCost, isBonusPack: true) //Indica che è il bonus pack
+                        }) {
+                            VStack(alignment: .center) {
+                                Text("Bonus Pack")
+                                    .font(.system(size: 32, weight: .bold, design: .default))
+                                    .foregroundColor(.yellow)
+                                    .shadow(color: .black, radius: 5)
 
-                            Text("Acquista 5 lezioni a soli \(bonusPackCost)€!")
-                                .font(.system(size: 20, weight: .medium, design: .default))
-                                .foregroundColor(.white)
-                                .shadow(color: .black, radius: 3)
+                                Text("Acquista 5 lezioni a soli \(bonusPackCost)€!")
+                                    .font(.system(size: 20, weight: .medium, design: .default))
+                                    .foregroundColor(.white)
+                                    .shadow(color: .black, radius: 3)
+                            }
+                            .padding()
+                            .background(Color.gray.opacity(0.8))
+                            .cornerRadius(10)
                         }
-                        .padding()
-                        .background(Color.gray.opacity(0.8))
-                        .cornerRadius(10)
                     }
                     .frame(maxWidth: .infinity, alignment: .center)
                     .padding(.bottom, 2)
@@ -129,10 +136,10 @@ struct PurchaseView: View {
     }
 
     // Funzione per aprire PayPal
-    func openPayPal(numberOfLessons: Int, totalCost: Int) {
+    func openPayPal(numberOfLessons: Int, totalCost: Int, isBonusPack: Bool) {
         let paypalEmail = "wilsonbasetta@example.com" // Sostituisci con la tua email PayPal
         let currencyCode = "EUR" // Codice valuta (Euro)
-        let itemName = "Lezioni di Boxe" // Nome dell'oggetto acquistato
+        let itemName = isBonusPack ? "Bonus Pack (5 Lezioni)" : "Lezioni di Boxe" // Nome dell'oggetto acquistato (diverso per il bonus pack)
 
         // Crea l'URL di PayPal
         let paypalURLString = "https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=\(paypalEmail)&amount=\(Double(totalCost))¤cy_code=\(currencyCode)&item_name=\(itemName)"

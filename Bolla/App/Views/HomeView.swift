@@ -15,18 +15,18 @@ struct HomeView: View {
 
                 // Testo "WBBS" e "WELCOME" con contorno nero
                 VStack {
-                    Text("WBBS")
+                    Text("YOU'RE IN!")
                         .font(.custom("Impact", size: 70).italic())
                         .foregroundColor(.white) // Colore del testo
                         .shadow(color: .black, radius: 5, x: 0, y: 5)
-                        .padding(10) // Padding per il testo
-                        .background(Color.green.opacity(0.7)) // Sfondo verde trasparente
+                        //.padding(10) // Rimozione del padding per il testo "YOU'RE IN!"
+                        .background(Color.green.opacity(0.8)) // Sfondo verde trasparente
                         .overlay(
                             RoundedRectangle(cornerRadius: 0)
                                 .stroke(.black, lineWidth: 2) // Contorno nero di 2 punti
                         )
 
-                    Text("WELCOME")
+                   /* Text("WELCOME") // RIMUOVO TUTTO IL BLOCCO
                         .font(.custom("Impact", size: 30).italic())
                         .foregroundColor(.white) // Colore del testo
                         .shadow(color: .black, radius: 5, x: 0, y: 5)
@@ -35,7 +35,7 @@ struct HomeView: View {
                         .overlay(
                             RoundedRectangle(cornerRadius: 0)
                                 .stroke(.black, lineWidth: 2) // Contorno nero di 2 punti
-                        )
+                        )*/
                 }
                 .padding(.top, -390) // Mantenuto
 
