@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		51851C7A4D96E1ACDE546290 /* Pods_Bolla.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75E64CAB40B80BBCEA2521F2 /* Pods_Bolla.framework */; };
+		A05CE0002D764C29004E26DE /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A05CDFFF2D764C29004E26DE /* EventKit.framework */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		A03C97B42D6F33E4009F2EF8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -24,9 +29,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		016407EB78D7E5E003076681 /* Pods-Bolla.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bolla.release.xcconfig"; path = "Target Support Files/Pods-Bolla/Pods-Bolla.release.xcconfig"; sourceTree = "<group>"; };
+		04EE8FDF6D5D1F862EC2655E /* Pods-Bolla.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bolla.debug.xcconfig"; path = "Target Support Files/Pods-Bolla/Pods-Bolla.debug.xcconfig"; sourceTree = "<group>"; };
+		75E64CAB40B80BBCEA2521F2 /* Pods_Bolla.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bolla.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A03C97A32D6F33E3009F2EF8 /* Bolla.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bolla.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A03C97B32D6F33E4009F2EF8 /* BollaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BollaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A03C97BD2D6F33E4009F2EF8 /* BollaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BollaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A05CDFFF2D764C29004E26DE /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
 		A0BB3BC12D708ADD005DF07F /* Untitled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Untitled.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -53,6 +62,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A05CE0002D764C29004E26DE /* EventKit.framework in Frameworks */,
+				51851C7A4D96E1ACDE546290 /* Pods_Bolla.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,6 +84,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0749A56387DCC00311389CAC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A05CDFFF2D764C29004E26DE /* EventKit.framework */,
+				75E64CAB40B80BBCEA2521F2 /* Pods_Bolla.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A03C979A2D6F33E3009F2EF8 = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +101,8 @@
 				A03C97B62D6F33E4009F2EF8 /* BollaTests */,
 				A03C97C02D6F33E4009F2EF8 /* BollaUITests */,
 				A03C97A42D6F33E3009F2EF8 /* Products */,
+				B968A4BF5C6A42BAA70A5431 /* Pods */,
+				0749A56387DCC00311389CAC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -94,6 +116,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		B968A4BF5C6A42BAA70A5431 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				04EE8FDF6D5D1F862EC2655E /* Pods-Bolla.debug.xcconfig */,
+				016407EB78D7E5E003076681 /* Pods-Bolla.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -101,6 +132,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A03C97C72D6F33E4009F2EF8 /* Build configuration list for PBXNativeTarget "Bolla" */;
 			buildPhases = (
+				1F0DDDBEA9EE8369F1F689D7 /* [CP] Check Pods Manifest.lock */,
 				A03C979F2D6F33E3009F2EF8 /* Sources */,
 				A03C97A02D6F33E3009F2EF8 /* Frameworks */,
 				A03C97A12D6F33E3009F2EF8 /* Resources */,
@@ -113,8 +145,6 @@
 				A03C97A52D6F33E3009F2EF8 /* Bolla */,
 			);
 			name = Bolla;
-			packageProductDependencies = (
-			);
 			productName = Bolla;
 			productReference = A03C97A32D6F33E3009F2EF8 /* Bolla.app */;
 			productType = "com.apple.product-type.application";
@@ -136,8 +166,6 @@
 				A03C97B62D6F33E4009F2EF8 /* BollaTests */,
 			);
 			name = BollaTests;
-			packageProductDependencies = (
-			);
 			productName = BollaTests;
 			productReference = A03C97B32D6F33E4009F2EF8 /* BollaTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -159,8 +187,6 @@
 				A03C97C02D6F33E4009F2EF8 /* BollaUITests */,
 			);
 			name = BollaUITests;
-			packageProductDependencies = (
-			);
 			productName = BollaUITests;
 			productReference = A03C97BD2D6F33E4009F2EF8 /* BollaUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
@@ -232,6 +258,31 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1F0DDDBEA9EE8369F1F689D7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Bolla-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A03C979F2D6F33E3009F2EF8 /* Sources */ = {
@@ -323,7 +374,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -380,7 +431,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -392,9 +443,11 @@
 		};
 		A03C97C82D6F33E4009F2EF8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 04EE8FDF6D5D1F862EC2655E /* Pods-Bolla.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Bolla/Preview Content\"";
@@ -422,9 +475,11 @@
 		};
 		A03C97C92D6F33E4009F2EF8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 016407EB78D7E5E003076681 /* Pods-Bolla.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Bolla/Preview Content\"";

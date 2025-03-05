@@ -1,0 +1,11 @@
+platform :ios, '13.0'
+
+target 'Bolla' do
+  use_frameworks!
+
+  pod 'Firebase/Firestore'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Database'
+  pod 'Firebase/Core'
+end
+

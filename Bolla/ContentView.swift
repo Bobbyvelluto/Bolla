@@ -1,24 +1,7 @@
-//
-//  ContentView.swift
-//  Bolla
-//
-//  Created by Maurizio Arena on 26/02/25.
-//
-
-import SwiftUI
+import SwiftUI  // Aggiungi questa riga in cima al file
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
+        Text("Hello, World!")
     }
-}
-
-#Preview {
-    ContentView()
 }

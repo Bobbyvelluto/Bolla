@@ -14,125 +14,135 @@ struct PurchaseView: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                // Immagine di sfondo "paypal" adattata allo schermo
-                Image("paypal")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: geometry.size.width, height: geometry.size.height)
+                // Colore di sfondo grigio scuro per riempire gli spazi vuoti
+                Color(red: 0.1, green: 0.1, blue: 0.1) // Grigio scuro
                     .edgesIgnoringSafeArea(.all)
-                    .offset(y: 40) // Abbassa l'immagine di 50 punti
+
+                // Immagine di sfondo "pugile" adattata allo schermo
+                Image("pugile")
+                    .resizable()
+                    .scaledToFill() // Riempie l'intero schermo mantenendo le proporzioni
+                    .frame(width: geometry.size.width, height: geometry.size.height)
+                    .edgesIgnoringSafeArea(.all) // Ignora le aree sicure (notch, home indicator, ecc.)
+                    .clipped() // Evita che l'immagine si estenda oltre i bordi
 
                 VStack {
-                    // "ACQUISTA LE TUE LEZIONI" con padding verde trasparente
-                    Text("ACQUISTA LE TUE LEZIONI")
-                        .font(.system(size: 26, weight: .bold, design: .default))
-                        .foregroundColor(.white)
-                        .shadow(color: .black, radius: 5)
-                        .padding()
-                        .background(Color.green.opacity(0.7))
-                        .cornerRadius(10)
-                        .padding(.top, -20) // Alzata di 30 punti (era 50)
-                        .frame(maxWidth: .infinity, alignment: .center)
-
                     Spacer()
 
-                    // Resto del contenuto in basso
-                    VStack {
-                        // Sezione "+" e "-" con rettangolo
-                        HStack {
-                            Button(action: {
-                                if numberOfLessons > 0 {
-                                    numberOfLessons -= 1
-                                }
-                            }) {
-                                Image(systemName: "minus.circle.fill")
-                                    .font(.largeTitle)
-                                    .foregroundColor(.red)
-                                    .padding(.horizontal, 10)
-                            }
+                    // Bonus Pack (primo modulo)
+                    Button(action: {
+                        // Apri PayPal con il bonus pack
+                        openPayPal(numberOfLessons: bonusPackLessons, totalCost: bonusPackCost, isBonusPack: true)
+                    }) {
+                        VStack(alignment: .center) {
+                            Text("Bonus Pack")
+                                .font(.system(size: 32, weight: .bold, design: .default))
+                                .foregroundColor(.yellow)
+                                .shadow(color: .black, radius: 5)
 
-                            Text("\(numberOfLessons) Lezioni")
-                                .font(.system(size: 24, weight: .medium, design: .default))
+                            Text("Acquista 5 lezioni a soli \(bonusPackCost)€!")
+                                .font(.system(size: 20, weight: .medium, design: .default))
+                                .foregroundColor(.white)
+                                .shadow(color: .black, radius: 3)
+                        }
+                        .padding()
+                        .background(Color.gray.opacity(0.9)) // Opacità aumentata
+                        .cornerRadius(10)
+                    }
+                    .padding(.bottom, 20) // Spazio sotto il Bonus Pack
+
+                    // Sezione "+" e "-" (secondo modulo)
+                    HStack {
+                        Button(action: {
+                            if numberOfLessons > 0 {
+                                numberOfLessons -= 1
+                            }
+                        }) {
+                            Image(systemName: "minus.circle.fill")
+                                .font(.largeTitle)
+                                .foregroundColor(.red)
+                                .padding(.horizontal, 10)
+                        }
+
+                        Text("\(numberOfLessons) Lezioni")
+                            .font(.system(size: 24, weight: .medium, design: .default))
+                            .foregroundColor(.white)
+                            .shadow(color: .black, radius: 3)
+                            .padding(.horizontal, 10)
+
+                        Button(action: {
+                            numberOfLessons += 1
+                        }) {
+                            Image(systemName: "plus.circle.fill")
+                                .font(.largeTitle)
+                                .foregroundColor(.green)
+                                .padding(.horizontal, 10)
+                        }
+                    }
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 10)
+                    .background(Color.gray.opacity(0.8)) // Opacità aumentata (meno trasparente)
+                    .cornerRadius(10)
+                    .padding(.bottom, 20) // Spazio sotto la sezione "+" e "-"
+
+                    // Costo Totale e pulsante "Acquista" (terzo modulo)
+                    HStack {
+                        Text("\(totalCost)€")
+                            .font(.system(size: 28, weight: .semibold, design: .default))
+                            .foregroundColor(.white)
+                            .shadow(color: .black, radius: 5)
+                            .padding(.horizontal, 15)
+                            .padding(.vertical, 8)
+                            .background(Color.green.opacity(0.7))
+                            .cornerRadius(8)
+
+                        // Pulsante "Acquista"
+                        Button(action: {
+                            // Apri PayPal quando l'utente clicca su "Acquista"
+                            openPayPal(numberOfLessons: numberOfLessons, totalCost: totalCost, isBonusPack: false)
+                        }) {
+                            Text("Acquista")
+                                .font(.system(size: 18, weight: .semibold, design: .default))
                                 .foregroundColor(.white)
                                 .shadow(color: .black, radius: 3)
                                 .padding(.horizontal, 10)
-
-                            Button(action: {
-                                numberOfLessons += 1
-                            }) {
-                                Image(systemName: "plus.circle.fill")
-                                    .font(.largeTitle)
-                                    .foregroundColor(.green)
-                                    .padding(.horizontal, 10)
-                            }
-                        }
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 10)
-                        .background(Color.gray.opacity(0.6))
-                        .cornerRadius(10)
-                        .padding(.bottom, 10)
-
-                        // Costo Totale con rettangolo e pulsante "Acquista"
-                        HStack {
-                            Text("\(totalCost)€")
-                                .font(.system(size: 28, weight: .semibold, design: .default))
-                                .foregroundColor(.white)
-                                .shadow(color: .black, radius: 5)
-                                .padding(.horizontal, 15)
-                                .padding(.vertical, 8)
-                                .background(Color.green.opacity(0.7))
+                                .padding(.vertical, 5)
+                                .background(numberOfLessons > 0 ? Color.green.opacity(0.7) : Color.gray.opacity(0.8)) // Opacità aumentata
                                 .cornerRadius(8)
-
-                            // Pulsante "Acquista"
-                            Button(action: {
-                                // Apri PayPal quando l'utente clicca su "Acquista"
-                                openPayPal(numberOfLessons: numberOfLessons, totalCost: totalCost, isBonusPack: false) //Indica che non è il bonus pack
-                            }) {
-                                Text("Acquista")
-                                    .font(.system(size: 18, weight: .semibold, design: .default))
-                                    .foregroundColor(.white)
-                                    .shadow(color: .black, radius: 3)
-                                    .padding(.horizontal, 10)
-                                    .padding(.vertical, 5)
-                                    .background(numberOfLessons > 0 ? Color.green.opacity(0.7) : Color.gray.opacity(0.7))
-                                    .cornerRadius(8)
-                            }
-                            .disabled(numberOfLessons == 0) // Disabilita il pulsante se numberOfLessons è 0
                         }
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 10)
-                        .background(Color.gray.opacity(0.4))
-                        .cornerRadius(10)
-                        .padding(.bottom, 20)
-
-                        // Bonus Pack
-                        Button(action: {
-                            // Apri PayPal con il bonus pack
-                            openPayPal(numberOfLessons: bonusPackLessons, totalCost: bonusPackCost, isBonusPack: true) //Indica che è il bonus pack
-                        }) {
-                            VStack(alignment: .center) {
-                                Text("Bonus Pack")
-                                    .font(.system(size: 32, weight: .bold, design: .default))
-                                    .foregroundColor(.yellow)
-                                    .shadow(color: .black, radius: 5)
-
-                                Text("Acquista 5 lezioni a soli \(bonusPackCost)€!")
-                                    .font(.system(size: 20, weight: .medium, design: .default))
-                                    .foregroundColor(.white)
-                                    .shadow(color: .black, radius: 3)
-                            }
-                            .padding()
-                            .background(Color.gray.opacity(0.8))
-                            .cornerRadius(10)
-                        }
+                        .disabled(numberOfLessons == 0) // Disabilita il pulsante se numberOfLessons è 0
                     }
-                    .frame(maxWidth: .infinity, alignment: .center)
-                    .padding(.bottom, 2)
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 10)
+                    .background(Color.gray.opacity(0.6)) // Opacità aumentata
+                    .cornerRadius(10)
+                    .padding(.bottom, -35) // Spazio in basso
                 }
                 .padding()
+
+                // Pulsante "Back" in alto a sinistra (solo l'icona verde con la freccia)
+                VStack {
+                    HStack {
+                        // Utilizza un semplice Button per tornare indietro
+                        Button(action: {
+                            // Azione per tornare indietro
+                            // Puoi usare una variabile di stato o un'azione personalizzata
+                        }) {
+                            Image(systemName: "chevron.left")
+                                .font(.system(size: 24, weight: .bold))
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(Color.green.opacity(0.7))
+                                .cornerRadius(10)
+                        }
+                        .padding(.leading, 24)
+                        .padding(.top, 20)
+                        Spacer()
+                    }
+                    Spacer()
+                }
             }
         }
-        .navigationBarHidden(true) // Nascondi la barra di navigazione
     }
 
     // Funzione per aprire PayPal
