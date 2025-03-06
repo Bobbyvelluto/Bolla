@@ -29,29 +29,7 @@ struct PurchaseView: View {
                 VStack {
                     Spacer()
 
-                    // Bonus Pack (primo modulo)
-                    Button(action: {
-                        // Apri PayPal con il bonus pack
-                        openPayPal(numberOfLessons: bonusPackLessons, totalCost: bonusPackCost, isBonusPack: true)
-                    }) {
-                        VStack(alignment: .center) {
-                            Text("Bonus Pack")
-                                .font(.system(size: 32, weight: .bold, design: .default))
-                                .foregroundColor(.yellow)
-                                .shadow(color: .black, radius: 5)
-
-                            Text("Acquista 5 lezioni a soli \(bonusPackCost)€!")
-                                .font(.system(size: 20, weight: .medium, design: .default))
-                                .foregroundColor(.white)
-                                .shadow(color: .black, radius: 3)
-                        }
-                        .padding()
-                        .background(Color.gray.opacity(0.9)) // Opacità aumentata
-                        .cornerRadius(10)
-                    }
-                    .padding(.bottom, 20) // Spazio sotto il Bonus Pack
-
-                    // Sezione "+" e "-" (secondo modulo)
+                    // Sezione "+" e "-" per aggiungere o rimuovere lezioni
                     HStack {
                         Button(action: {
                             if numberOfLessons > 0 {
@@ -85,7 +63,7 @@ struct PurchaseView: View {
                     .cornerRadius(10)
                     .padding(.bottom, 20) // Spazio sotto la sezione "+" e "-"
 
-                    // Costo Totale e pulsante "Acquista" (terzo modulo)
+                    // Sezione Costo Totale e pulsante "Acquista"
                     HStack {
                         Text("\(totalCost)€")
                             .font(.system(size: 28, weight: .semibold, design: .default))
@@ -116,31 +94,32 @@ struct PurchaseView: View {
                     .padding(.vertical, 10)
                     .background(Color.gray.opacity(0.6)) // Opacità aumentata
                     .cornerRadius(10)
-                    .padding(.bottom, -35) // Spazio in basso
+                    .padding(.bottom, 20) // Spazio sotto la sezione "Acquista"
+
+                    // Bonus Pack (modulo in basso)
+                    Button(action: {
+                        // Apri PayPal con il bonus pack
+                        openPayPal(numberOfLessons: bonusPackLessons, totalCost: bonusPackCost, isBonusPack: true)
+                    }) {
+                        VStack(alignment: .center) {
+                            Text("Bonus Pack")
+                                .font(.system(size: 32, weight: .bold, design: .default))
+                                .foregroundColor(.yellow)
+                                .shadow(color: .black, radius: 5)
+
+                            Text("Acquista 5 lezioni a soli \(bonusPackCost)€!")
+                                .font(.system(size: 20, weight: .medium, design: .default))
+                                .foregroundColor(.white)
+                                .shadow(color: .black, radius: 3)
+                        }
+                        .padding()
+                        .background(Color.gray.opacity(0.9)) // Opacità aumentata
+                        .cornerRadius(10)
+                    }
+                    .padding(.bottom, 20) // Spazio sotto il Bonus Pack
+
                 }
                 .padding()
-
-                // Pulsante "Back" in alto a sinistra (solo l'icona verde con la freccia)
-                VStack {
-                    HStack {
-                        // Utilizza un semplice Button per tornare indietro
-                        Button(action: {
-                            // Azione per tornare indietro
-                            // Puoi usare una variabile di stato o un'azione personalizzata
-                        }) {
-                            Image(systemName: "chevron.left")
-                                .font(.system(size: 24, weight: .bold))
-                                .foregroundColor(.white)
-                                .padding()
-                                .background(Color.green.opacity(0.7))
-                                .cornerRadius(10)
-                        }
-                        .padding(.leading, 24)
-                        .padding(.top, 20)
-                        Spacer()
-                    }
-                    Spacer()
-                }
             }
         }
     }

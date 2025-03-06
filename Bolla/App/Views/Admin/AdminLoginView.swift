@@ -1,56 +1,70 @@
 import SwiftUI
 
 struct AdminLoginView: View {
-    @State private var username: String = ""
-    @State private var password: String = ""
-    @State private var isAuthenticated: Bool = false // Stato per la navigazione
+    @State private var adminCode = "" // Codice inserito dall'utente
+    @State private var isAuthenticated = false // Stato di autenticazione
+    @State private var isError = false // Flag per errore nel codice
+
+    let correctCode = "998899" // Codice corretto per accedere come admin
 
     var body: some View {
-        NavigationStack {
-            ZStack {
-                // Immagine di sfondo (puoi cambiarla con un'immagine adatta)
-                Color.gray.opacity(0.2)
-                    .edgesIgnoringSafeArea(.all)
+        VStack {
+            Text("Accedi come Admin")
+                .font(.title2)
+                .bold()
+                .padding()
 
-                VStack(spacing: 20) {
-                    // Campo per l'username
-                    TextField("Username", text: $username)
-                        .padding()
-                        .background(Color.white.opacity(0.8))
-                        .cornerRadius(10)
-                        .padding(.horizontal, 20)
+            // Campo di inserimento del codice
+            SecureField("Inserisci codice admin", text: $adminCode)
+                .padding()
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .frame(width: 250)
+                .padding(.bottom, 20)
 
-                    // Campo per la password
-                    SecureField("Password", text: $password)
-                        .padding()
-                        .background(Color.white.opacity(0.8))
-                        .cornerRadius(10)
-                        .padding(.horizontal, 20)
-
-                    // Pulsante di login
-                    Button(action: {
-                        // Verifica le credenziali
-                        if username == "admin" && password == "password" {
-                            isAuthenticated = true
-                        } else {
-                            print("Credenziali errate")
-                        }
-                    }) {
-                        Text("Login")
-                            .font(.system(size: 18, weight: .bold))
-                            .foregroundColor(.white)
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                            .background(Color.blue)
-                            .cornerRadius(10)
-                    }
-                    .padding(.horizontal, 20)
-                }
-                .navigationDestination(isPresented: $isAuthenticated) {
-                    
-                }
+            // Messaggio di errore se il codice è sbagliato
+            if isError {
+                Text("Codice errato! Riprova.")
+                    .foregroundColor(.red)
+                    .padding()
             }
-            .navigationTitle("Admin Login")
+
+            // Pulsante di accesso con icona di mano alzata
+            HStack(spacing: 10) {
+                Button(action: {
+                    authenticateAdmin()
+                }) {
+                    Text("Accedi")
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(Color.blue)
+                        .cornerRadius(10)
+                }
+
+                // Icona di mano alzata con padding bianco dinamico
+                Image(systemName: "hand.raised.fill")
+                    .foregroundColor(.red)
+                    .font(.title)
+                    .padding(10)
+                    .background(Color.white.opacity(0.8))
+                    .clipShape(Circle())
+            }
+            .padding()
+
+            Spacer()
+        }
+        .padding()
+        .navigationDestination(isPresented: $isAuthenticated) {
+            AdminCalendarView() // Navigazione al calendario dell'amministratore dopo autenticazione
+        }
+    }
+
+    // Funzione per verificare il codice dell'admin
+    func authenticateAdmin() {
+        if adminCode == correctCode {
+            isAuthenticated = true
+            isError = false
+        } else {
+            isError = true
         }
     }
 }
